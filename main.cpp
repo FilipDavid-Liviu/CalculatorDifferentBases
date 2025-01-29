@@ -248,7 +248,7 @@ int log_base(int a, int b)
     return p;
 }
 
-basic_string<char> corresponding_group(char x, int initial_base, int target_base)
+string corresponding_group(char x, int initial_base, int target_base)
 {
     string from4_2[4] = {"00", "01", "10", "11"};
     string from8_2[8] = {"000", "001", "010", "011", "100", "101", "110", "111"};
