@@ -73,21 +73,21 @@ number_base addition(number_base x, number_base y)
 {
     int base = x.base;
     int c = 0, i, val;
-    number_base z{.base = base};
+    number_base result{.base = base};
     for (i = 0; i < strlen(x.text) && i < strlen(y.text); i++){
         val = c + transform_in_digit(x.text[strlen(x.text)-1-i])
               + transform_in_digit(y.text[strlen(y.text)-1-i]);
         c = 0;
         if (val >= base)
             c = 1;
-        z.text[i] = transform_in_char(val % base);
+        result.text[i] = transform_in_char(val % base);
     }
     while (i < strlen(x.text)){
         val = c + transform_in_digit(x.text[strlen(x.text)-1-i]);
         c = 0;
         if (val >= base)
             c = 1;
-        z.text[i] = transform_in_char(val % base);
+        result.text[i] = transform_in_char(val % base);
         i++;
     }
     while (i < strlen(y.text)){
@@ -95,50 +95,50 @@ number_base addition(number_base x, number_base y)
         c = 0;
         if (val >= base)
             c = 1;
-        z.text[i] = transform_in_char(val % base);
+        result.text[i] = transform_in_char(val % base);
         i++;
     }
     if (c == 1)
-        z.text[i] = '1';
-    strrev(z.text);
-    return z;
+        result.text[i] = '1';
+    strrev(result.text);
+    return result;
 }
 
 number_base subtraction(number_base x, number_base y)
 {
     int base = x.base;
     int c = 0, i, val;
-    number_base z{.base = base};
+    number_base result{.base = base};
     for (i = 0; i < strlen(x.text) && i < strlen(y.text); i++){
         val = c + transform_in_digit(x.text[strlen(x.text)-1-i])
               - transform_in_digit(y.text[strlen(y.text)-1-i]);
         c = 0;
         if (val < 0){
             c = -1;
-            z.text[i] = transform_in_char(val + base);
+            result.text[i] = transform_in_char(val + base);
         }
-        else z.text[i] = transform_in_char(val);
+        else result.text[i] = transform_in_char(val);
     }
     while (i < strlen(x.text)){
         val = transform_in_digit(x.text[strlen(x.text)-1-i]) + c;
         c = 0;
         if (val < 0){
-            z.text[i] = transform_in_char(val + base);
+            result.text[i] = transform_in_char(val + base);
             c = -1;
         }
-        else z.text[i] = transform_in_char(val);
+        else result.text[i] = transform_in_char(val);
         i++;
     }
-    strrev(z.text);
-    delete_0(z.text);
-    return z;
+    strrev(result.text);
+    delete_0(result.text);
+    return result;
 }
 
 number_base multiplication_one_digit(number_base x, number_base y)
 {
     int base = x.base;
     int c = 0, i, val;
-    number_base z{.base = base};
+    number_base result{.base = base};
     for (i = 0; i < strlen(x.text); i++){
         val = c + transform_in_digit(x.text[strlen(x.text)-1-i])
                   * transform_in_digit(y.text[0]);
@@ -146,45 +146,45 @@ number_base multiplication_one_digit(number_base x, number_base y)
         if (val >= base){
             c = val / base;
         }
-        z.text[i] = transform_in_char(val % base);
+        result.text[i] = transform_in_char(val % base);
     }
     if (c > 0)
-        z.text[i] = transform_in_char(c);
-    strrev(z.text);
-    delete_0(z.text);
-    return z;
+        result.text[i] = transform_in_char(c);
+    strrev(result.text);
+    delete_0(result.text);
+    return result;
 }
 
 number_base division_one_digit(number_base x, number_base y)
 {
     int base = x.base;
     int c = 0, i, val;
-    number_base z{.base = base};
+    number_base result{.base = base};
     for (i = 0; i < strlen(x.text); i++){
         val = (c * base + transform_in_digit(x.text[i])) / transform_in_digit(y.text[0]);
         c = (c * base + transform_in_digit(x.text[i])) % transform_in_digit(y.text[0]);
-        z.text[i] = transform_in_char(val);
+        result.text[i] = transform_in_char(val);
     }
-    delete_0(z.text);
-    return z;
+    delete_0(result.text);
+    return result;
 }
 
 number_base division_one_digit_residue(number_base x, number_base y)
 {
     int base = x.base;
     int c = 0, i;
-    number_base z{.base = base};
+    number_base result{.base = base};
     for (i = 0; i < strlen(x.text); i++){
         c = (c * base + transform_in_digit(x.text[i])) % transform_in_digit(y.text[0]);
     }
-    z.text[0] = transform_in_char(c);
-    return z;
+    result.text[0] = transform_in_char(c);
+    return result;
 }
 
 number_base conversion_using_10(number_base x, int target_base)
 {
     int val10 = 0, i, power = 1;
-    number_base z{.base = target_base};
+    number_base result{.base = target_base};
     strrev(x.text);
     for (i = 0; i < strlen(x.text); i++){
         val10 += transform_in_digit(x.text[i]) * power;
@@ -192,35 +192,35 @@ number_base conversion_using_10(number_base x, int target_base)
     }
     cout<<"base 10 : "<<val10<<endl;
     for (i = 0; val10 > 0; i++){
-        z.text[i] = transform_in_char(val10 % target_base);
+        result.text[i] = transform_in_char(val10 % target_base);
         val10 /= target_base;
     }
-    strrev(z.text);
-    z.base = target_base;
-    return z;
+    strrev(result.text);
+    result.base = target_base;
+    return result;
 }
 
 number_base conversion_using_division(number_base x, int target_base)
 {
-    number_base z{.base = target_base}, digit{};
+    number_base result{.base = target_base}, digit{};
     digit.text[0] = transform_in_char(target_base);
     digit.text[1]= '\0';
     digit.base = x.base;
-    strcpy(z.text, "");
+    strcpy(result.text, "");
     while (strcmp(x.text, "0") != 0){
         number_base aux{};
         aux = division_one_digit_residue(x,digit);
-        strcat(z.text, aux.text);
+        strcat(result.text, aux.text);
         x = division_one_digit(x, digit);
     }
-    strrev(z.text);
-    return z;
+    strrev(result.text);
+    return result;
 }
 
 number_base conversion_using_substitution(number_base x, int target_base)
 {
-    number_base z{.base = target_base}, pow_target{}, pow_former{};
-    strcpy(z.text, "0");
+    number_base result{.base = target_base}, pow_target{}, pow_former{};
+    strcpy(result.text, "0");
     pow_former.text[0] = transform_in_char(x.base);
     pow_former.text[1] = '\0';
     pow_former.base = target_base;
@@ -233,10 +233,10 @@ number_base conversion_using_substitution(number_base x, int target_base)
         digit.text[1] = '\0';
         digit.base = target_base;
         val_in_target_base = multiplication_one_digit(pow_target, digit);
-        z = addition(z,val_in_target_base);
+        result = addition(result,val_in_target_base);
         pow_target = multiplication_one_digit(pow_target, pow_former);
     }
-    return z;
+    return result;
 }
 
 int log_base(int a, int b)
@@ -287,34 +287,34 @@ char corresponding_digit(char x[], int initial_base)
 
 number_base conversion_using_rapid_conversion(number_base x, int target_base)
 {
-    number_base z{.base = target_base};
-    strcpy(z.text, "");
+    number_base result{.base = target_base};
+    strcpy(result.text, "");
     if (x.base > target_base){
         for (int i = 0; i < strlen(x.text); i++){
             string group = corresponding_group(x.text[i], x.base, target_base);
-            strcat(z.text, group.c_str());
+            strcat(result.text, group.c_str());
         }
-        delete_0(z.text);
+        delete_0(result.text);
     }
     else {
-        int digits_in_group = log_base(x.base, target_base);
+        int digits_per_group = log_base(x.base, target_base);
         strrev(x.text);
-        for (int i = 0; i < strlen(x.text); i = i + digits_in_group){
-            while (strlen(x.text) - i < digits_in_group)
+        for (int i = 0; i < strlen(x.text); i = i + digits_per_group){
+            while (strlen(x.text) - i < digits_per_group)
                 strcat(x.text, "0");
             char aux[100];
             strcpy(aux, x.text + i);
-            aux[digits_in_group] = '\0';
+            aux[digits_per_group] = '\0';
             char aux_digit = corresponding_digit(aux, x.base);
             char aux_source[2];
             aux_source[0] = aux_digit;
             aux_source[1] = '\0';
-            strcat(z.text, aux_source);
+            strcat(result.text, aux_source);
         }
-        strrev(z.text);
-        delete_0(z.text);
+        strrev(result.text);
+        delete_0(result.text);
     }
-    return z;
+    return result;
 }
 
 int main() {
