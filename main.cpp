@@ -190,7 +190,7 @@ number_base conversion_using_10(number_base x, int target_base)
         val10 += transform_in_digit(x.text[i]) * power;
         power *= x.base;
     }
-    cout<<"base 10 : "<<val10<<endl;
+    cout << "base 10 : " << val10 << endl;
     for (i = 0; val10 > 0; i++){
         result.text[i] = transform_in_char(val10 % target_base);
         val10 /= target_base;
@@ -318,49 +318,49 @@ number_base conversion_using_rapid_conversion(number_base x, int target_base)
 
 int main() {
     while (true) {
-        cout<<"\n1. Arithmetic operations for positive integers\n";
-        cout<<"2. Conversions of natural numbers between two bases\n";
-        cout<<"0. Exit the program\n";
+        cout << "\n1. Arithmetic operations for positive integers\n";
+        cout << "2. Conversions of natural numbers between two bases\n";
+        cout << "0. Exit the program\n";
 
         char option_main[100];
-        cout<<">";
+        cout << ">";
         cin >> option_main;
 
         if (option_main[0] == '0') {
-            cout<<"Goodbye!\n";
+            cout << "Goodbye!\n";
             break;
         }
         else if (option_main[0] == '1') {
-            cout<<"Arithmetic operations\n";
+            cout << "Arithmetic operations\n";
             while (true){
-                cout<<"\n1. Addition\n";
-                cout<<"2. Subtraction\n";
-                cout<<"3. Multiplication by one digit\n";
-                cout<<"4. Division by one digit\n";
-                cout<<"0. Go back\n";
+                cout << "\n1. Addition\n";
+                cout << "2. Subtraction\n";
+                cout << "3. Multiplication by one digit\n";
+                cout << "4. Division by one digit\n";
+                cout << "0. Go back\n";
 
                 char option_operation[100];
-                cout<<">";
+                cout << ">";
                 cin >> option_operation;
 
                 if (option_operation[0] == '0') {
                     break;
                 }
                 else if (option_operation[0] == '1') {
-                    cout<<"Addition\n";
+                    cout << "Addition\n";
                     number_base operand1{}, operand2{};
 
-                    cout<<"Base:";
-                    cin>>operand1.base;
+                    cout << "Base:";
+                    cin >> operand1.base;
                     operand2.base = operand1.base;
 
-                    cout<<"First number:";
-                    cin>>operand1.text;
-                    cout<<"Second number:";
-                    cin>>operand2.text;
+                    cout << "First number:";
+                    cin >> operand1.text;
+                    cout << "Second number:";
+                    cin >> operand2.text;
 
                     if (!check_number_base(operand1) || !check_number_base(operand2)) {
-                        cout<<"ERROR: Numbers not defined in base\n";
+                        cout << "ERROR: Numbers not defined in base\n";
                     }
                     else {
                         number_base result = addition(operand1, operand2);
@@ -368,23 +368,23 @@ int main() {
                     }
                 }
                 else if (option_operation[0] == '2'){
-                    cout<<"Subtraction\n";
+                    cout << "Subtraction\n";
                     number_base operand1{}, operand2{};
 
-                    cout<<"Base:";
-                    cin>>operand1.base;
+                    cout << "Base:";
+                    cin >> operand1.base;
                     operand2.base = operand1.base;
 
-                    cout<<"First number:";
-                    cin>>operand1.text;
-                    cout<<"Second number:";
-                    cin>>operand2.text;
+                    cout << "First number:";
+                    cin >> operand1.text;
+                    cout << "Second number:";
+                    cin >> operand2.text;
 
                     if (!check_number_base(operand1) || !check_number_base(operand2)) {
-                        cout<<"ERROR: Numbers not defined in base\n";
+                        cout << "ERROR: Numbers not defined in base\n";
                     }
                     else if(!is_first_bigger(operand1, operand2)){
-                        cout<<"ERROR: Result is not a natural number\n";
+                        cout << "ERROR: Result is not a natural number\n";
                     }
                     else {
                         number_base result = subtraction(operand1, operand2);
@@ -392,167 +392,167 @@ int main() {
                     }
                 }
                 else if (option_operation[0] == '3'){
-                    cout<<"Multiplication by one digit\n";
+                    cout << "Multiplication by one digit\n";
                     number_base operand1{}, operand2{};
 
-                    cout<<"Base:";
-                    cin>>operand1.base;
+                    cout << "Base:";
+                    cin >> operand1.base;
                     operand2.base = operand1.base;
 
-                    cout<<"First number:";
-                    cin>>operand1.text;
-                    cout<<"Second number:";
-                    cin>>operand2.text;
+                    cout << "First number:";
+                    cin >> operand1.text;
+                    cout << "Second number:";
+                    cin >> operand2.text;
                     strcpy(operand2.text + 1,"\0");
 
                     if (!check_number_base(operand1) || !check_number_base(operand2)) {
-                        cout<<"ERROR: Numbers not defined in base\n";
+                        cout << "ERROR: Numbers not defined in base\n";
                     }
                     else {
                         number_base result = multiplication_one_digit(operand1, operand2);
-                        cout<<result.text<<endl;
+                        cout << result.text << endl;
                     }
                 }
                 else if (option_operation[0] == '4'){
-                    cout<<"Division by one digit\n";
+                    cout << "Division by one digit\n";
                     number_base operand1{}, operand2{};
 
-                    cout<<"Base:";
-                    cin>>operand1.base;
+                    cout << "Base:";
+                    cin >> operand1.base;
                     operand2.base = operand1.base;
 
-                    cout<<"First number:";
-                    cin>>operand1.text;
-                    cout<<"Second number:";
-                    cin>>operand2.text;
+                    cout << "First number:";
+                    cin >> operand1.text;
+                    cout << "Second number:";
+                    cin >> operand2.text;
                     strcpy(operand2.text + 1,"\0");
 
                     if (!check_number_base(operand1) || !check_number_base(operand2)) {
-                        cout<<"ERROR: Numbers not defined in base\n";
+                        cout << "ERROR: Numbers not defined in base\n";
                     }
                     else {
                         number_base result = division_one_digit(operand1, operand2);
                         number_base residue = division_one_digit_residue(operand1, operand2);
-                        cout<<result.text<<",  residue: "<<residue.text<<endl;
+                        cout << result.text << ",  residue: " << residue.text << endl;
                     }
                 }
                 else {
-                    cout<<"ERROR: No valid value inserted\n";
+                    cout << "ERROR: No valid value inserted\n";
                 }
             }
         } else if (option_main[0] == '2') {
-            cout<<"Conversions of natural numbers between 2 bases\n";
+            cout << "Conversions of natural numbers between 2 bases\n";
             while (true){
-                cout<<"\n1. Conversion using 10 as an intermediate base\n";
-                cout<<"2. Conversion through successive divisions\n";
-                cout<<"3. Conversion using the substitution method\n";
-                cout<<"4. Rapid conversions\n";
-                cout<<"0. Go back\n";
+                cout << "\n1. Conversion using 10 as an intermediate base\n";
+                cout << "2. Conversion through successive divisions\n";
+                cout << "3. Conversion using the substitution method\n";
+                cout << "4. Rapid conversions\n";
+                cout << "0. Go back\n";
 
                 char option_convert[100];
-                cout<<">";
+                cout << ">";
                 cin >> option_convert;
 
                 if (option_convert[0] == '0') {
                     break;
                 }
                 else if (option_convert[0] == '1') {
-                    cout<<"Using 10 as an intermediate base\n";
+                    cout << "Using 10 as an intermediate base\n";
                     number_base operand{};
                     int new_base;
-                    cout<<"Initial base:";
-                    cin>>operand.base;
-                    cout<<"Number:";
-                    cin>>operand.text;
-                    cout<<"Base to be converted into:";
+                    cout << "Initial base:";
+                    cin >> operand.base;
+                    cout << "Number:";
+                    cin >> operand.text;
+                    cout << "Base to be converted into:";
                     cin >> new_base;
 
                     if (!check_number_base(operand)) {
-                        cout<<"ERROR: Number not defined in original base\n";
+                        cout << "ERROR: Number not defined in original base\n";
                     }
                     else {
                         operand = conversion_using_10(operand, new_base);
-                        cout<<"Base "<<new_base<<": "<<operand.text<<endl;
+                        cout << "Base " << new_base << ": " << operand.text << endl;
                     }
                 }
                 else if (option_convert[0] == '2'){
-                    cout<<"Successive division method (Old base >= New base)\n";
+                    cout << "Successive division method (Old base >= New base)\n";
                     number_base operand{};
                     int new_base;
 
-                    cout<<"Initial base:";
-                    cin>>operand.base;
-                    cout<<"Number:";
-                    cin>>operand.text;
-                    cout<<"Base to be converted into:";
+                    cout << "Initial base:";
+                    cin >> operand.base;
+                    cout << "Number:";
+                    cin >> operand.text;
+                    cout << "Base to be converted into:";
                     cin >> new_base;
 
                     if (!check_number_base(operand)) {
-                        cout<<"ERROR: Number not defined in original base\n";
+                        cout << "ERROR: Number not defined in original base\n";
                     }
                     else if (operand.base < new_base){
-                        cout<<"ERROR: The chosen bases are not compatible for successive division method\n";
+                        cout << "ERROR: The chosen bases are not compatible for successive division method\n";
                     }
                     else {
                         operand = conversion_using_division(operand, new_base);
-                        cout<<"Base "<<new_base<<": "<<operand.text<<endl;
+                        cout << "Base " << new_base << ": " << operand.text << endl;
                     }
                 }
                 else if (option_convert[0] == '3'){
-                    cout<<"Substitution method (Old base <= New base)\n";
+                    cout << "Substitution method (Old base <= New base)\n";
                     number_base operand{};
                     int new_base;
 
-                    cout<<"Initial base:";
-                    cin>>operand.base;
-                    cout<<"Number:";
-                    cin>>operand.text;
-                    cout<<"Base to be converted into:";
+                    cout << "Initial base:";
+                    cin >> operand.base;
+                    cout << "Number:";
+                    cin >> operand.text;
+                    cout << "Base to be converted into:";
                     cin >> new_base;
 
                     if (!check_number_base(operand)) {
-                        cout<<"ERROR: Number not defined in original base\n";
+                        cout << "ERROR: Number not defined in original base\n";
                     }
                     else if (operand.base > new_base){
-                        cout<<"ERROR: The chosen bases are not compatible for substitution method\n";
+                        cout << "ERROR: The chosen bases are not compatible for substitution method\n";
                     }
                     else {
                         operand = conversion_using_substitution(operand, new_base);
-                        cout<<"Base "<<new_base<<": "<<operand.text<<endl;
+                        cout << "Base " << new_base << ": " << operand.text << endl;
                     }
                 }
                 else if (option_convert[0] == '4'){
-                    cout<<"Rapid conversions (one base power of the other)\n";
+                    cout << "Rapid conversions (one base power of the other)\n";
                     number_base operand{};
                     int new_base;
 
-                    cout<<"Initial base:";
-                    cin>>operand.base;
-                    cout<<"Number:";
-                    cin>>operand.text;
-                    cout<<"Base to be converted into:";
+                    cout << "Initial base:";
+                    cin >> operand.base;
+                    cout << "Number:";
+                    cin >> operand.text;
+                    cout << "Base to be converted into:";
                     cin >> new_base;
 
                     if (!check_number_base(operand)) {
-                        cout<<"ERROR: Number not defined in original base\n";
+                        cout << "ERROR: Number not defined in original base\n";
                     }
                     else if (new_base > 16 or operand.base > 16 or new_base < 2 or operand.base < 2){
-                        cout<<"ERROR: Bases must be between 2 and 16 and one base power of the other\n";
+                        cout << "ERROR: Bases must be between 2 and 16 and one base power of the other\n";
                     }
                     else if (!check_rapid_conversion_compatibility(operand.base, new_base)){
-                        cout<<"ERROR: The chosen bases are not compatible for rapid conversion (one base power of the other)\n";
+                        cout << "ERROR: The chosen bases are not compatible for rapid conversion (one base power of the other)\n";
                     }
                     else {
                         operand = conversion_using_rapid_conversion(operand, new_base);
-                        cout<<"Base "<<new_base<<": "<<operand.text<<endl;
+                        cout << "Base " << new_base << ": " << operand.text << endl;
                     }
                 }
                 else {
-                    cout<<"ERROR: No valid value inserted\n";
+                    cout << "ERROR: No valid value inserted\n";
                 }
             }
         } else {
-            cout<<"ERROR: No valid value inserted\n";
+            cout << "ERROR: No valid value inserted\n";
         }
     }
     return 0;
